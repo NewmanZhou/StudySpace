@@ -1,0 +1,19 @@
+# Python:
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+dist
+build
+.DS_Store
+*/build/*
+.idea/*
+*.iml
+/out/*
+target/
+.idea
+*/target
+*/*.iml
+*.iml
+.gitignore.swp
+
