@@ -23,6 +23,22 @@ $     匹配行的结束
 
 '''
 1.1 英文句号
-英文句号 . 是元字符的最简单的例子。
+英文句号 . 是元字符的最简单的例子。 元字符 . 可以匹配任意单个字符。它不会匹配换行符和新行的字符。
+例如正则表达式 .ar  表示：任意字符后面跟着一个字母 a ,再后面跟着一个字母 r 。
+
+" .ar " ==> The car parked in the garage.
+        ==>     car par           gar
 
 '''
+
+# match 从字符串其实位置开始匹配 开头没有符合规则的 就不再匹配 返回None
+m = re.match('.ar','The car parked in the garage.')
+
+# 匹配字符串中第一个 符合规则的 并返回 不再继续匹配
+m = re.search('.ar','The car parked in the garage.')
+print(m.group())
+
+# 匹配所有符合规则的 并返回数组
+m = re.findall('.ar','The car parked in the garage.')
+print(m)
+
