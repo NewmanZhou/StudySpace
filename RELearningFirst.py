@@ -42,3 +42,24 @@ print(m.group())
 m = re.findall('.ar','The car parked in the garage.')
 print(m)
 
+'''
+1.2 字符集
+字符集也称为字符类，方括号被用于指定字符集。使用字符集内的连字符来指定字符范围。方括号内的字符范围的顺序并不重要。
+例如正则表达式[Tt]he,表示：大写T 或 小写t， 后面跟字母h，再后跟字母 e 。
+
+"[Tt]he" => The car parked in the garage.
+
+然而，字符集中的英文句号表示它字面的含义。正则表达式 ar[.] , 表示小写字母ar 后面再跟着一个英文句号 . 字符。 
+
+"ar[.]" => A garage is a good place to park a car.
+        =>                                      ar.
+
+1.2.1 否定字符集
+一般来说插入字符 ^ 表示一个字符串的开始，但是当他在方块内出现时，它会取消字符集。例如增则表达式 [^c]ar, 
+表示： 除了字母 c 以外的任意字符，后面跟着字符 a ，再后面跟着一个字母 r 。
+
+"[^c]ar" => The car parked in the garage.  
+         =>         par           gar
+
+'''
+
