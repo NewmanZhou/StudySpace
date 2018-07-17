@@ -63,3 +63,49 @@ print(m)
 
 '''
 
+'''
+1.3 重复
+   + * ？ 用来指定子模式可以出现多少次。
+1.3.1 星号
+该符号 * 表示匹配上一个匹配规则 零次或多次。 正则表达式 a* 表示小写字母 a 可以重复零次或者多次。
+但是他如果出现在字符集或者字符类之后，它表示整个字符集的重复。
+例如正则表达式 [a-z]* , 表示：一行中可以包含任意数量的小写字母。
+
+"[a-z]*" => The car parked in the garage #21.
+         =>    he car parked in the garage
+
+该 * 符号可以与元符号 . 用在一起，
+用来匹配任意字符串 .*。该 * 符号可以与空格符 \s 一起使用，用来匹配一串空格字符。 
+例如正则表达式 \s*cat\s*，表示: 零个或多个空格，后面跟小写字母 c，再后面跟小写字母 a，
+再再后面跟小写字母 t，后面再跟零个或多个空格。
+
+"\s*cat\s*" => The fat cat sat on the cat.
+                       cat            cat
+
+'''
+m = re.findall('[a-z]*','The car parked in the garage #21.')
+print(m)
+
+m = re.findall('\s*cat\s*','The fat cat sat on the cat.')
+print(m)
+
+'''
+1.3.2 加号
+该符号 + 匹配上一个字符的一次或多次。例如正则表达式 c.+t , 
+表示：一个小写字母c,后跟任意数量的字符，后跟小写字母t。
+"c.+t" => The fat cat sat on the mat.
+       =>         cat sat on the mat
+
+'''
+m = re.findall('c.+t','The fat cat sat on the mat.')
+print(m)
+
+'''
+1.3.3 问号 
+在正则表达式中，元字符 ？ 用来表示前一个字符是可选的。该符号匹配前一个字符的 零次或一次。
+例如：正则表达式 [T]?he，表示: 可选的大写字母 T，后面跟小写字母 h，后跟小写字母 e。
+"[T]?he" => The car is parked in the garage.
+         => The                   he
+'''
+m = re.findall('[T]?he','The car is parked in the garage.')
+print(m)
