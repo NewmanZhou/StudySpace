@@ -137,3 +137,38 @@ print(m)
 "(c|g|p)ar  => The car is parked in the garage"
             =>     car    par           gar
 '''
+
+'''
+1.6 分支结构
+在正则表达式中垂直线| 用来定义分支结构，分支结构就像多个表达式之间的条件。现在你可能认为这个字符集和分支机构的工作方式一样。
+但是字符集和分支机构巨大的区别是字符集只在字符集别上有用，然而分支机构在表达式级别上依然可以使用。例如：
+"(T|t)he|car" => The car is parked in the garage.
+              => The car              the
+
+'''
+
+'''
+1.7 转义特殊字符
+正则表达式中使用反斜杠 \ 来转义下一个字符。这将允许你使用保留字符来作为匹配字符。{} [] / \ + * . $ ^ | ? 
+在特殊字符前面加 \ ，就可以使用它来匹配字符。
+"(f|c|m)at\.?" => The fat cata sat on the mat.
+               =>     fat cat             mat.
+'''
+
+'''
+1.8 定位符
+在正则表达式中，为了检查匹配符号是否是起始符号或结尾符号
+^ 检测匹配字符是否是起始字符，第二种类型 $ ，它检测匹配字符是否是输入字符串的会后一个字符。
+"(T|t)he" => The car is parked in the garage.
+          => The                  the
+
+"^(T|t)he" => The car is parked in the garage.
+           => The
+           
+           
+"(at\.)" => The fat cat. sat. on the mat.
+         =>          at   at          at 
+
+"$(at\.)" => The fat cat. sat. on the mat.
+          =>                           at
+'''
