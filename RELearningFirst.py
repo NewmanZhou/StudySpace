@@ -167,8 +167,50 @@ print(m)
            
            
 "(at\.)" => The fat cat. sat. on the mat.
-         =>          at   at          at 
+         =>          at.  at.         at. 
 
 "$(at\.)" => The fat cat. sat. on the mat.
-          =>                           at
+          =>                           at.
 '''
+
+# 匹配中间段 全部
+s = '''<recordset>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2018/7/3/art_1337_25511.html' class='bt_link' title='重大税收违法案件信息公布（2018年7月3日）'>重大税收违法案件信息公布（2018年7月3日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2018-07-03</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2018/6/8/art_1337_25297.html' class='bt_link' title='重大税收违法案件信息公布（2018年6月8日）'>重大税收违法案件信息公布（2018年6月8日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2018-06-08</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2018/5/10/art_1337_24887.html' class='bt_link' title='重大税收违法案件信息公布（2018年5月10日）'>重大税收违法案件信息公布（2018年5月10日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2018-05-10</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2018/4/10/art_1337_24400.html' class='bt_link' title='重大税收违法案件信息公布（2018年4月10日）'>重大税收违法案件信息公布（2018年4月10日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2018-04-10</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2018/3/9/art_1337_23939.html' class='bt_link' title='重大税收违法案件信息公布（2018年3月9日）'>重大税收违法案件信息公布（2018年3月9日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2018-03-09</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2018/1/10/art_1337_23173.html' class='bt_link' title='重大税收违法案件信息公布（2018年1月10日）'>重大税收违法案件信息公布（2018年1月10日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2018-01-10</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2017/12/8/art_1337_22640.html' class='bt_link' title='重大税收违法案件信息公布（2017年12月8日）'>重大税收违法案件信息公布（2017年12月8日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2017-12-08</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2017/11/8/art_1337_22030.html' class='bt_link' title='重大税收违法案件信息公布（2017年11月8日）'>重大税收违法案件信息公布（2017年11月8日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2017-11-08</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2017/10/9/art_1337_21636.html' class='bt_link' title='重大税收违法案件信息公布（2017年10月9日）'>重大税收违法案件信息公布（2017年10月9日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2017-10-09</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2017/9/8/art_1337_21139.html' class='bt_link' title='重大税收违法案件信息公布（2017年9月8日）'>重大税收违法案件信息公布（2017年9月8日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2017-09-08</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2017/8/7/art_1337_20471.html' class='bt_link' title='重大税收违法案件信息公布（2017年8月7日）'>重大税收违法案件信息公布（2017年8月7日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2017-08-07</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2017/7/6/art_1337_19896.html' class='bt_link' title='重大税收违法案件信息公布（2017年7月6日）'>重大税收违法案件信息公布（2017年7月6日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2017-07-06</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2017/5/2/art_1337_18941.html' class='bt_link' title='公告'>公告</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2017-05-02</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2017/1/6/art_1337_17477.html' class='bt_link' title='重大税收违法案件信息公布（2017年1月6日）'>重大税收违法案件信息公布（2017年1月6日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2017-01-06</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2016/11/24/art_1337_16833.html' class='bt_link' title='重大税收违法案件信息公布（2016年11月24日）'>重大税收违法案件信息公布（2016年11月24日）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2016-11-24</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2016/11/23/art_1337_16829.html' class='bt_link' title='公告'>公告</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2016-11-23</span><br>]]></record>
+<record><![CDATA[
+<span style="margin-left:10px;"><img src='/picture/0/s1605131626317206101.jpg' align='absmiddle' border='0'></span><a style='font-size:14px;line-height:35px; padding-top:10px;'  href='/art/2016/11/1/art_1337_16356.html' class='bt_link' title='重大税收违法案件信息公布（2016年7月）'>重大税收违法案件信息公布（2016年7月）</a> <span class='bt_time' style="float:right; margin-right:20px; font-size:12px; line-height:30px;">2016-11-01</span><br>]]></record>
+</recordset>'''
+# m = re.findall(r'recordset>((?:.|\n)*?)</recordset',s)
+# m = re.findall(r'recordset>(.*?)</recordset',s,re.DOTALL)
+m = re.findall(r'recordset>((.|\n)*?)</recordset',s)
+print(m)
