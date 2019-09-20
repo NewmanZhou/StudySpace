@@ -214,8 +214,8 @@ s = '''<recordset>
 # m = re.findall(r'recordset>(.*?)</recordset',s,re.DOTALL)
 m = re.findall(r'<record>((.|\n)*?)</record>',s)
 for i in m:
-    print i
+    print(i)
     url = re.findall(r"href=\\'(.+\.html)",str(i))
     date = re.findall(r"20\d{2}-\d{1,2}-\d{1,2}",str(i))
-    print url
-    print date
+    print(url)
+    print(date)

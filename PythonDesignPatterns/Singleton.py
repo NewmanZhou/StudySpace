@@ -12,9 +12,9 @@ class Singleton(object):
         return cls.instance
 
 s = Singleton()
-print s
+print(s)
 s1 = Singleton()
-print s1
+print(s1)
 
 # 懒汉式实例化
 class LazySingleton(object):
@@ -34,5 +34,5 @@ s = LazySingleton()
 print("Object created",LazySingleton.getInstance())
 
 s1 = LazySingleton()
-print s1.getInstance()
+print(s1.getInstance())
 

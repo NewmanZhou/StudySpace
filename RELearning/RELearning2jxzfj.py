@@ -34,7 +34,7 @@ import re
 '''
 
 m = '$4.44 and $10.88'
-print re.findall('(?<=\$)[0-9\.]* ',m)
+print (re.findall('(?<=\$)[0-9\.]* ',m))
 
 '''
 正向先行断言
