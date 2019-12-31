@@ -12,7 +12,7 @@
 # @Software: PyCharm
 import time
 
-import requests, json
+import requests, json, time
 
 
 def wukonguser():
@@ -310,6 +310,70 @@ def zhihu():
 
     print(response.text)
 
+def fenghuang():
+
+    headers = {
+        'User-Agent': 'ifengnews/6.7.51(Android;android_4.4.4;OPPO/R8207)',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Host': 'api.iclient.ifeng.com',
+    }
+
+    params = (
+        ('action', 'down'),
+        ('pullNum', '3'),
+        ('dailyOpenNum', '1'),
+        ('gv', '6.7.51'),
+        ('av', '6.7.51'),
+        ('uid', '865685026456494'),
+        ('deviceid', '865685026456494'),
+        ('proid', 'ifengnews'),
+        ('os', 'android_19'),
+        ('df', 'androidphone'),
+        ('vt', '5'),
+        ('screen', '720x1280'),
+        ('publishid', '2607'),
+        ('nw', 'wifi'),
+        ('loginid', ''),
+        ('adAid', ''),
+        ('st', str(int(time.time()*10000))),
+        ('sn', 'c96f710ca387362468cb9c3f4321e253'),
+    )
+
+
+    response = requests.post('https://api.iclient.ifeng.com/followFeeds', headers=headers, params=params, )
+
+    dict_datas = json.loads(response.text)
+    if dict_datas:
+        items = dict_datas[0].get("item")
+        for item in items:
+            try:
+                followid = (item["subscribe"]["followid"])
+                fenghuang_user(followid)
+            except Exception:
+                print(item)
+
+def fenghuang_user(followid):
+
+    headers = {
+        'User-Agent': 'ifengnews/6.7.51(Android;android_4.4.4;OPPO/R8207)',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Host': 'api.3g.ifeng.com',
+    }
+
+    params = (
+        ('proid', 'ifengnews'),
+        ('followid', followid),
+    )
+
+    response = requests.post('https://api.3g.ifeng.com/api_wemedia_index_info', headers=headers, params=params,
+                             )
+
+    print(response.text)
+    print("\n\n")
+    print(response.url)
 
 if __name__ == '__main__':
-    qeh_user()
+    # while True:
+    fenghuang()
+    # fenghuang_user("source_封面新闻")
+
