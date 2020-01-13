@@ -61,6 +61,7 @@ def routine(factory):  # 每隔5秒向服务器发送消息
     while not bStop:
         if factory.protocol and factory.protocol.connected:
             factory.protocol.transport.write("hello, I'm %s  %s ".encode("utf8"))
+        time.sleep(3)
 host = "127.0.0.1"
 port = 8007
 factory = EchoClientFactory()

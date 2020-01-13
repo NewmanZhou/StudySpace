@@ -319,38 +319,39 @@ def fenghuang():
     }
 
     params = (
-        ('action', 'down'),
-        ('pullNum', '3'),
-        ('dailyOpenNum', '1'),
-        ('gv', '6.7.51'),
-        ('av', '6.7.51'),
-        ('uid', '865685026456494'),
-        ('deviceid', '865685026456494'),
-        ('proid', 'ifengnews'),
-        ('os', 'android_19'),
-        ('df', 'androidphone'),
-        ('vt', '5'),
-        ('screen', '720x1280'),
-        ('publishid', '2607'),
-        ('nw', 'wifi'),
-        ('loginid', ''),
-        ('adAid', ''),
+        # ('action', 'down'),
+        # ('pullNum', '3'),
+        # ('dailyOpenNum', '1'),
+        # ('gv', '6.7.51'),
+        # ('av', '6.7.51'),
+        ('uid', str(int(time.time()*100000))),
+        # ('deviceid', '865685026456494'),
+        # ('proid', 'ifengnews'),
+        # ('os', 'android_19'),
+        # ('df', 'androidphone'),
+        # ('vt', '5'),
+        # ('screen', '720x1280'),
+        # ('publishid', '2607'),
+        # ('nw', 'wifi'),
+        # ('loginid', ''),
+        # ('adAid', ''),
         ('st', str(int(time.time()*10000))),
-        ('sn', 'c96f710ca387362468cb9c3f4321e253'),
+        # ('sn', 'c96f710ca387362468cb9c3f4321e253'),
     )
 
-
+    # https://api.iclient.ifeng.com/followFeeds?uid=157794974813075&st=15779497481307
     response = requests.post('https://api.iclient.ifeng.com/followFeeds', headers=headers, params=params, )
 
     dict_datas = json.loads(response.text)
+    print(response.url)
     if dict_datas:
         items = dict_datas[0].get("item")
         for item in items:
             try:
                 followid = (item["subscribe"]["followid"])
                 fenghuang_user(followid)
-            except Exception:
-                print(item)
+            except KeyError:
+                pass
 
 def fenghuang_user(followid):
 
@@ -369,11 +370,113 @@ def fenghuang_user(followid):
                              )
 
     print(response.text)
-    print("\n\n")
+    print("\n")
     print(response.url)
+    print("\n")
+
+def sina():
+    import requests
+
+    headers = {
+        'Accept-Language': 'zh-CN,zh;q=0.8',
+        'rand': '756',
+        'urlSign': '38aa974835',
+        'signVer': '2.0',
+        'gsid': '',
+        'X-User-Agent': 'OPPO-R8207__sinanews__7.29.5__android__4.4.4__485',
+        'User-Agent': 'OPPO-R8207__sinanews__7.29.5__android__4.4.4__485',
+        'SN-REQID': '1578536653183cda081738346',
+        'Host': 'newsapi.sina.cn',
+    }
+
+    params = (
+        ('resource', 'feed'),
+        ('behavior', 'manual'),
+        ('lDid', '46ff19af-fe44-454f-8734-2e7a4ec6495c'),
+        ('oldChwm', ''),
+        ('weiboUid', ''),
+        ('listCount', '17'),
+        ('ua', 'OPPO-R8207__sinanews__7.29.5__android__4.4.4__485'),
+        ('oaid', ''),
+        ('localSign', 'a_c0f13903-f4f7-4ddc-bbc4-f0a92c2902e9'),
+        ('seId', '12266f1928'),
+        ('deviceModel', 'OPPO__OPPO__R8207'),
+        ('andId', ''),
+        ('osVersion', '4.4.4'),
+        ('deviceId', 'c05aae5dffb89bcf'),
+        ('ssoVer', '3'),
+        ('imei', ''),
+        ('chwm', '12606_0020'),
+        ('mpName', '\u63A8\u8350'),
+        ('upTimes', '0'),
+        ('sn', ''),
+        ('connectionType', '2'),
+        ('lastTimestamp', '1578536631'),
+        ('topStyle', 'z'),
+        ('open_adtype', '0'),
+        ('loadingAdTimestamp', '0'),
+        ('loginType', '0'),
+        ('userType', 'install'),
+        ('pullTimes', '5'),
+        ('appVersion', '7.29.5'),
+        ('resolution', '720x1280'),
+        ('replacedFlag', '1'),
+        ('osSdk', '19'),
+        ('authGuid', ''),
+        ('sand', 'aXlldvB/MUQmU+yIl0CKSMSo0mkRYsKvBj/ssybPjcQ='),
+        ('from', '6000095012'),
+        ('downTimes', '4'),
+        ('pullDirection', 'down'),
+        ('authUid', ''),
+        ('link', ''),
+        ('location', '39.921582,116.473809'),
+        ('deviceIdV1', 'c05aae5dffb89bcf'),
+        ('authToken', ''),
+        ('channel', 'news_toutiao'),
+        ('accessToken', ''),
+        ('aId', '01AxJCGp7n44qzdcgl6mfBgqMsr91ZQxRYApk12g4Ivt8i3WI.'),
+        ('mac', ''),
+        ('city', 'CN11010500000000'),
+        ('weiboSuid', ''),
+    )
+
+    response = requests.get('https://newsapi.sina.cn/', headers=headers, params=params)
+
+    print(response.text)
+
+def qqkandian():
+    import requests
+
+    cookies = {
+        'uin': 'o380994877',
+        'skey': 'M4LTJbgMxd',# @oLkpjKGgK
+    }
+
+    headers = {
+        'User-Agent': 'QQ/8.2.6 Android/0.17 Android/4.4.4',
+        'Host': 'kandian.qq.com',
+    }
+
+    params = (
+        ('srcID', '1'),
+        ('reportInfo', 'eyJuZXR3b3JrVHlwZSI6MX0='),
+        ('pageCookies', ''),
+        ('bkn', '1066362718'),
+        ('channelID', '40531'),
+    )
+
+    response = requests.get('https://kandian.qq.com/cgi-bin/kandianChannelFeeds/getChannelFeeds', headers=headers,
+                            params=params, cookies=cookies)
+
+    print(response.text)
+    '''
+    accountID
+    '''
 
 if __name__ == '__main__':
-    # while True:
-    fenghuang()
-    # fenghuang_user("source_封面新闻")
-
+    qqkandian()
+    '''
+    MTAwMTAwMDExNDQ0Nw%3d%3d
+    MzA2MTM4MjI2MA==
+    
+    '''
