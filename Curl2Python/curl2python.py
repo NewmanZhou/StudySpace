@@ -183,13 +183,12 @@ def qeh():
     newslist = dict_data["newslist"]
     print(len(newslist))
     for i in newslist:
-        chlid = i.get("chlid","")
+        chlid = i.get("chlid", "")
         chlname = i["chlname"]
         print(chlid)
         print(chlname)
-        if chlid :
+        if chlid:
             print(i)
-
 
 
 def qeh_user():
@@ -310,8 +309,8 @@ def zhihu():
 
     print(response.text)
 
-def fenghuang():
 
+def fenghuang():
     headers = {
         'User-Agent': 'ifengnews/6.7.51(Android;android_4.4.4;OPPO/R8207)',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -324,7 +323,7 @@ def fenghuang():
         # ('dailyOpenNum', '1'),
         # ('gv', '6.7.51'),
         # ('av', '6.7.51'),
-        ('uid', str(int(time.time()*100000))),
+        ('uid', str(int(time.time() * 100000))),
         # ('deviceid', '865685026456494'),
         # ('proid', 'ifengnews'),
         # ('os', 'android_19'),
@@ -335,7 +334,7 @@ def fenghuang():
         # ('nw', 'wifi'),
         # ('loginid', ''),
         # ('adAid', ''),
-        ('st', str(int(time.time()*10000))),
+        ('st', str(int(time.time() * 10000))),
         # ('sn', 'c96f710ca387362468cb9c3f4321e253'),
     )
 
@@ -353,8 +352,8 @@ def fenghuang():
             except KeyError:
                 pass
 
-def fenghuang_user(followid):
 
+def fenghuang_user(followid):
     headers = {
         'User-Agent': 'ifengnews/6.7.51(Android;android_4.4.4;OPPO/R8207)',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -373,6 +372,7 @@ def fenghuang_user(followid):
     print("\n")
     print(response.url)
     print("\n")
+
 
 def sina():
     import requests
@@ -444,12 +444,13 @@ def sina():
 
     print(response.text)
 
+
 def qqkandian():
     import requests
 
     cookies = {
-        'uin': 'o380994877',
-        'skey': 'M4LTJbgMxd',# @oLkpjKGgK
+        'uin': '380994877',
+        'skey': 'mXDhQW3neg',  # @oLkpjKGgK
     }
 
     headers = {
@@ -473,10 +474,350 @@ def qqkandian():
     accountID
     '''
 
+
+def yidian():
+    import requests
+
+    cookies = {
+        'JSESSIONID': 'koBIksB-VpWY31jb9de-EA',
+    }
+
+    headers = {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Host': 'a1.go2yd.com',
+        'User-Agent': 'Dalvik/1.6.0 (Linux; U; Android 4.4.4; R8207 Build/KTU84P)',
+    }
+
+    params = (
+        ('platform', '1'),
+        ('appid', 'yidian'),
+        ('distribution', 'app.qq.com'),
+        ('version', '024400'),
+        ('docid', 'V_060rMNcJ'),
+        ('net', 'wifi'),
+    )
+
+    data = '{"clientInfo":{"userInfo":{"businessarea":[{"location":"39.916114,116.480024","name":"\u7EA2\u5E99"},{"location":"39.920246,116.462411","name":"\u547C\u5BB6\u697C"},{"location":"39.926917,116.472791","name":"\u6C34\u7893\u5B50"}],"region":"%E5%8C%97%E4%BA%AC%E5%B8%82%2C%E5%8C%97%E4%BA%AC%E5%B8%82%2C%E6%9C%9D%E9%98%B3%E5%8C%BA%2C%E5%8C%97%E4%BA%AC%E5%B8%82%E6%9C%9D%E9%98%B3%E5%8C%BA%E9%87%91%E5%8F%B0%E5%8C%97%E8%A1%97%E9%9D%A0%E8%BF%91%E5%91%BC%E5%AE%B6%E6%A5%BC%E4%B8%AD%E5%BF%83%E5%B0%8F%E5%AD%A6%28%E4%B8%9C%E6%A0%A1%E5%8C%BA%29","vaId":"","aaId":"","imei":"fb3c75d093528f0b8a630611cda08173","cityCode":"010","androidId":"aa864676b309bf74","mac":"a8:1b:5a:2d:98:d5","adCode":"110105","country":"CN","AOI":[{"id":"B000A84J19","location":"39.92089,116.47411","area":23472.455,"name":"\u4EBA\u6C11\u65E5\u62A5\u793E\u5BBF\u820D\u5317\u533A"}],"udId":"","appVersion":"5.2.1.1","oaId":"","GPS":"39.9215693,116.4738677","language":"zh","serviceProvider":""},"requestInfo":{"is_video":false},"deviceInfo":{"screenHeight":1230,"UA":"Dalvik\\/1.6.0 (Linux; U; Android 4.4.4; R8207 Build\\/KTU84P)","ppi":320,"androidVersion":"4.4.4","model":"R8207","screenWidth":720,"manufacturer":"OPPO","device":"R1C","brand":"OPPO"}}}'
+
+    response = requests.post('http://a1.go2yd.com/Website/contents/related-news2', headers=headers, params=params,
+                             cookies=cookies)
+
+    print(response.text)
+
+
+def yidian_01():
+    import requests
+
+    cookies = {
+        'JSESSIONID': 'koBIksB-VpWY31jb9de-EA',
+    }
+
+    headers = {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Host': 'a1.go2yd.com',
+        'User-Agent': 'Dalvik/1.6.0 (Linux; U; Android 4.4.4; R8207 Build/KTU84P)',
+    }
+
+    params = (
+        ('platform', '1'),
+        ('os', '19'),
+        ('cstart', '0'),
+        ('profile_id', '559026144'),
+        ('androidId', '6c4360a0e0670f17979ba1d3399f2368'),
+        ('appid', 'yidian'),
+        ('tab', 'all'),
+        ('cv', '5.2.1.1'),
+        ('personalRec', '1'),
+        ('distribution', 'app.qq.com'),
+        ('reqid', 'fm3thb92_1579262084987_366'),
+        ('version', '024400'),
+        ('cend', '30'),
+        ('brand', 'OPPO'),
+        ('apk_meta_channel', 'app.qq.com'),
+        ('signature',
+         'jOJ7rPdESWAouxe-0XhXBVtyCKHebIPL4awgDjSh9Qhe3X2Znzz92Dk7cL6eUBj072YcBDfGjBEYyfey7kHT1ypt79RJ-YjZxMRDC_PRPJ7UJwLHhRqY3iTI-OXESRbtxNt5soEJdDl9bAdXdyZDVMuMXra9kJyl5pOjcV99IAc'),
+        ('fields',
+         ['docid', 'date', 'image', 'image_urls', 'like', 'source', 'title', 'url', 'comment_count', 'up', 'down']),
+        ('net', 'wifi'),
+    )
+
+    data = '{"clientInfo":{"userInfo":{"businessarea":[{"location":"39.916114,116.480024","name":"\u7EA2\u5E99"},{"location":"39.920246,116.462411","name":"\u547C\u5BB6\u697C"},{"location":"39.926917,116.472791","name":"\u6C34\u7893\u5B50"}],"region":"%E5%8C%97%E4%BA%AC%E5%B8%82%2C%E5%8C%97%E4%BA%AC%E5%B8%82%2C%E6%9C%9D%E9%98%B3%E5%8C%BA%2C%E5%8C%97%E4%BA%AC%E5%B8%82%E6%9C%9D%E9%98%B3%E5%8C%BA%E9%87%91%E5%8F%B0%E5%8C%97%E8%A1%97%E9%9D%A0%E8%BF%91%E5%91%BC%E5%AE%B6%E6%A5%BC%E4%B8%AD%E5%BF%83%E5%B0%8F%E5%AD%A6%28%E4%B8%9C%E6%A0%A1%E5%8C%BA%29","vaId":"","aaId":"","imei":"fb3c75d093528f0b8a630611cda08173","cityCode":"010","androidId":"aa864676b309bf74","mac":"a8:1b:5a:2d:98:d5","adCode":"110105","country":"CN","AOI":[{"id":"B000A84J19","location":"39.92089,116.47411","area":23472.455,"name":"\u4EBA\u6C11\u65E5\u62A5\u793E\u5BBF\u820D\u5317\u533A"}],"udId":"","appVersion":"5.2.1.1","oaId":"","GPS":"39.9215693,116.4738677","language":"zh","serviceProvider":""},"deviceInfo":{"screenHeight":1230,"UA":"Dalvik\\/1.6.0 (Linux; U; Android 4.4.4; R8207 Build\\/KTU84P)","ppi":320,"androidVersion":"4.4.4","model":"R8207","screenWidth":720,"manufacturer":"OPPO","device":"R1C","brand":"OPPO"}}}'
+
+    response = requests.post('http://a1.go2yd.com/Website/channel/news-list-for-profile', headers=headers,
+                             params=params, cookies=cookies)
+
+    print(response.text)
+
+
+# 一点资讯视频数据采集
+def yidian_02():
+    import requests
+
+    cookies = {
+        'JSESSIONID': 'sxYGFtM0o5FwCTBGej-BWg',
+    }
+
+    headers = {
+        'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 5.1.1; f100 Build/LMY48Z)',
+        'Content-Type': 'application/json',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en',
+        'Host': 'a1.go2yd.com',
+    }
+    params = (
+        ('platform', '1'),
+        ('interest_id',
+         'd4XLO2ArglN7pnWr0OD5BoppFZoaTgWJVAa12BMsyLzBo9ko-f3zmRycJ3mvs5ZmLQVROR6leXjBV5RD7PtvEmcc5k8HJss_PAWize5SqwTZPs24Di4F71zKmTIc1jRtBySVQQMKJNdz1N72XQ7V5E22-SVh7CxwhsfFOyW3pax_qpBEY1987t8UYW_9Z9qJssSEcFIX8LwWNPMWXJVaPA'),
+        ('appid', 'yidian'),
+        # ('searchentry', 'search_video_media'),
+        ('cv', '5.2.1.1'),
+        ('distribution', 'app.qq.com'),
+        ('reqid', 'fm3thb92_1579338720115_367'),
+        ('version', '024400'),
+        ('signature',
+         'Ekyu6QOerg_9akX9TrP8m5xqupjdIqzDkGBk4mXobmmzxINrs09I1iP1RlvZZHqTz2_KgjAPrxopLVSCKtmaK8JLBfhdRQPPWcC3m6ZDIi8fpGn2I2pGEDgnglYPFO2eyf4LzIbjt_SMngLZPZlTGx28_GpfSRDIA6c3-T-GHj4'),
+        ('fields',
+         ['docid', 'date', 'image', 'image_urls', 'like', 'source', 'title', 'url', 'comment_count', 'up', 'down']),
+    )
+
+    data = '{"clientInfo": {"deviceInfo": {"model": "f100", "device": "x86", "androidVersion": "5.1.1", "screenWidth": 720, "screenHeight": 1242, "ppi": 240, "brand": "gionee", "manufacturer": "gionee", "UA": "Dalvik\\\\/2.1.0 (Linux; U; Android 5.1.1; f100 Build\\\\/LMY48Z)"}, "userInfo": {"imei": "418480a4accdedf941c5c6014e91e5fd", "mac": "00:81:2d:6b:af:12", "language": "zh", "country": "CN", "serviceProvider": "CHINA MOBILE", "appVersion": "5.0.7.2", "androidId": "1735d985f0fd1b97", "region": "", "cityCode": "010", "adCode": "110101", "GPS": "", "businessarea": [], "AOI": []}}}'
+
+    response = requests.post('http://a1.go2yd.com/Website/channel/news-list-for-vertical', headers=headers,
+                             params=params, cookies=cookies, data=data)
+
+    print(response.text)
+
+
+def yidian_03():
+    import requests
+
+    cookies = {
+        'JSESSIONID': 'koBIksB-VpWY31jb9de-EA',
+    }
+
+    headers = {
+        'Host': 'a1.go2yd.com',
+        'User-Agent': 'Dalvik/1.6.0 (Linux; U; Android 4.4.4; R8207 Build/KTU84P)',
+    }
+    params = (
+        ('platform', '1'),
+        ('cstart', '30'),
+        ('interest_id',
+         'd4XLO2ArglN7pnWr0OD5BoppFZoaTgWJVAa12BMsyLzBo9ko-f3zmRycJ3mvs5ZmLQVROR6leXjBV5RD7PtvEmcc5k8HJss_PAWize5SqwTZPs24Di4F71zKmTIc1jRtBySVQQMKJNdz1N72XQ7V5E22-SVh7CxwhsfFOyW3pax_qpBEY1987t8UYW_9Z9qJssSEcFIX8LwWNPMWXJVaPA'),
+        ('appid', 'yidian'),
+        ('cv', '5.2.1.1'),
+        ('distribution', 'app.qq.com'),
+        ('reqid', 'fm3thb92_1579339985663_360'),
+        ('version', '024400'),
+        ('signature',
+         'uyhJIT9SIEXsjEaNfRgfmpZsNmZJGiSRRItMcX0du75WU6mmArMnzHxcuWZfzJSC-aJukwhkCJh2pjD5Rt-Vxlyw9OftdqvJibQVBevuWQbwI-0oqwYRultkAirhqzfW4hXTYZseViJIN0p017pgzwcdI8EB_AWrwQMwg0GlT54'),
+        ('fields',
+         ['docid', 'date', 'image', 'image_urls', 'like', 'source', 'title', 'url', 'comment_count', 'up', 'down']),
+    )
+
+    response = requests.get('http://a1.go2yd.com/Website/channel/news-list-for-vertical', headers=headers,
+                            params=params, cookies=cookies)
+
+    print(response.text)
+
+def tonghuashun_yidin():
+    import requests
+
+    cookies = {
+        'JSESSIONID': 'koBIksB-VpWY31jb9de-EA',
+    }
+
+    headers = {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Host': 'a1.go2yd.com',
+        'User-Agent': 'Dalvik/1.6.0 (Linux; U; Android 4.4.4; R8207 Build/KTU84P)',
+    }
+
+    params = (
+        ('platform', '1'),
+        ('os', '19'),
+        ('cstart', '30'),
+        ('profile_id', '227259132'),
+        ('androidId', '6c4360a0e0670f17979ba1d3399f2368'),
+        ('appid', 'yidian'),
+        ('tab', 'all'),
+        ('cv', '5.2.1.1'),
+        ('personalRec', '1'),
+        ('distribution', 'app.qq.com'),
+        ('reqid', 'fm3thb92_1579587076743_437'),
+        ('version', '024400'),
+        ('cend', '30'),
+        ('brand', 'OPPO'),
+        ('apk_meta_channel', 'app.qq.com'),
+        ('signature',
+         'q67QuyJ2b8EOhjLFRKwvNc2yX8hyALGWNWaIaTTyAY9KREZvZp1Or0Sdgd1I7rmu-wUXN7-T7DwKlrwT8E2RDxZCt6LldoHrnUrPoZnMvz6diQy91Or5BAqp4mgCvFx1F0Aag3DDorqk1kvg-SmjdRrE-POc3R4Tn9lSGSynPsw'),
+        ('fields',
+         ['docid', 'date', 'image', 'image_urls', 'like', 'source', 'title', 'url', '\ncomment_count', 'up', 'down']),
+        ('net', 'wifi'),
+    )
+
+
+    response = requests.post('http://a1.go2yd.com/Website/channel/news-list-for-profile', headers=headers,
+                             params=params, cookies=cookies)
+
+    data_res = json.loads(response.text)
+    data_list = data_res["result"]
+    for data in data_list:
+        title = data["title"]
+        print(title)
+
+def fenhuang_user_list_pager():
+    import requests
+
+    headers = {
+        'User-Agent': 'ifengnews/6.7.61(Android;android_4.4.4;OPPO/R8207)',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Host': 'api.3g.ifeng.com',
+    }
+
+    params = (
+        ('followid', ['weMedia_310999', 'weMedia_310999']),
+        # ('tag', 'article'), # 文章
+        ('tag', 'video'), # 视频
+        ('page', '1'),
+        # ('gv', '6.7.61'),
+        # ('av', '6.7.61'),
+        ('uid', str(int(time.time() * 100000))),
+        # ('deviceid', '865685026456493'),
+        # ('proid', 'ifengnews'),
+        # ('os', 'android_19'),
+        # ('df', 'androidphone'),
+        # ('vt', '5'),
+        # ('screen', '720x1280'),
+        # ('publishid', '2011'),
+        # ('nw', 'wifi'),
+        # ('loginid', ''),
+        # ('adAid', ''),
+        ('st', str(int(time.time() * 10000))),
+        # ('sn', '3ce24674047b4a866fe69e960c8f3d3d'),
+    )
+
+
+    response = requests.get('https://api.3g.ifeng.com/api_wemedia_index', headers=headers, params=params)
+
+    # NB. Original query string below. It seems impossible to parse and
+    # reproduce query strings 100% accurately so the one below is given
+    # in case the reproduced version is not "correct".
+    # response = requests.post('https://api.3g.ifeng.com/api_wemedia_index?followid=weMedia_767468&tag=article&followid=weMedia_767468&page=2&gv=6.7.61&av=6.7.61&uid=865685026456493&deviceid=865685026456493&proid=ifengnews&os=android_19&df=androidphone&vt=5&screen=720x1280&publishid=2011&nw=wifi&loginid=&adAid=&st=15794157981677&sn=3ce24674047b4a866fe69e960c8f3d3d', headers=headers, data=data)
+
+    print(response.text)
+
+def yizhuan_zhihu(pagenum):
+    import requests
+
+    cookies = {
+        'ckt': '1579573138',
+        'SERVERID': 'b2423565d5dad72693e41bc165a503d1|1579573137|1579573129',
+        'Identification': '18801169146',
+        'Token': 'YzVlNjJhNjctNzg4Ni00N2NlLWE3ZTEtMDFlODQ2M2MzMjYxLDEwMDA4',
+        'ct': 'YzVlNjJhNjctNzg4Ni00N2NlLWE3ZTEtMDFlODQ2M2MzMjYxLDEwMDA4_1579573130628',
+        'Hm_lpvt_ced0fdd76ec7917e53cc84fc7c4d4777': '1579573131',
+        'Hm_lvt_ced0fdd76ec7917e53cc84fc7c4d4777': '1579261744,1579513944,1579513966,1579573131',
+        'sid': 'YzVlNjJhNjctNzg4Ni00N2NlLWE3ZTEtMDFlODQ2M2MzMjYxLDEwMDA4',
+    }
+
+    headers = {
+        'Host': 'tool.people.cn',
+        'content-type': 'application/x-www-form-urlencoded',
+        'accept': 'application/json, text/plain, */*',
+        'x-requested-with': 'XMLHttpRequest',
+        'accept-language': 'zh-cn',
+        'origin': 'https://tool.people.cn',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.2 Safari/605.1.15',
+        'referer': 'https://tool.people.cn/work.html',
+        'ajax': 'true',
+    }
+
+    data = 'PageIndex={}&PageSize=15&OrderBy%5B0%5D%5BName%5D=HMCTDate&OrderBy%5B0%5D%5BOrderByType%5D=2&Where%5B0%5D%5BName%5D=APID&Where%5B0%5D%5BSymbol%5D=1&Where%5B0%5D%5BValue%5D=1&Where%5B1%5D%5BName%5D=HMCTDate&Where%5B1%5D%5BSymbol%5D=5&Where%5B1%5D%5BValue%5D=2020-01-15%2000%3A00&Where%5B2%5D%5BName%5D=HMCTDate&Where%5B2%5D%5BSymbol%5D=6&Where%5B2%5D%5BValue%5D=2020-01-22%2000%3A00&cp=sw8tm81zjnq&sp=2sx142k614q2m1ok19'.format(pagenum)
+
+    response = requests.post('https://tool.people.cn/Mediabrary/Topic/MContent', headers=headers, cookies=cookies,
+                             data=data)
+
+
+    print(response.text)
+
+def douchachalist():
+    import requests
+
+    headers = {
+        'Host': 'api.douchacha.com',
+        'Content-Type': 'application/json;charset=utf-8',
+        'Origin': 'https://www.douchacha.com',
+        'Accept': 'application/json, text/plain, */*',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.2 Safari/605.1.15',
+        'Referer': 'https://www.douchacha.com/',
+        'Accept-Language': 'zh-cn',
+    }
+
+    params = (
+        ('\nts', '1581561604664'),
+        ('he', 'www.douchacha.com'),
+        ('sign', 'fbf7d86113c93ad3'),
+    )
+
+    data = '{"page_no":1,"page_size":10,"params_data":{"label_name":"","period":"WEEK","period_value":"20200209"}}'
+
+    response = requests.post('https://api.douchacha.com/api/tiktok/ranking/user_list_gain', headers=headers,
+                             params=params, data=data)
+
+    print(response.text)
+
+def douchachauser():
+    import requests
+
+    headers = {
+        'Host': 'api.douchacha.com',
+        'Origin': 'https://www.douchacha.com',
+        'd-f': 'MTU4MTU2MzA3NDY1NDpuMDVzQkJBdW5yb0ZuZU5YSjNXRUVERGRtRkE1RGM0ZHhqYjAzTE5RTHNzJTNEOjYxY2Q1NGY5ZTBjZDljMTc=',
+        'Accept': 'application/json, text/plain, */*',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.2 Safari/605.1.15',
+        'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODIxNjY3NDEsInVzZXJJZCI6MTIyNzc4NTg4ODkwMTA0MjE3OCwiY3JlYXRlRGF0ZSI6IjIwMjAtMDItMTMgMTA6NDU6NDEifQ.vdzCC0TCYlppNE9_4JIQli1jxBa_85m3CbnQNuvNJsM',
+        'Referer': 'https://www.douchacha.com/',
+        'Accept-Language': 'zh-cn',
+    }
+
+    params = (
+        ('userId', '93189025747'),
+    )
+
+    response = requests.get('https://api.douchacha.com/api/tiktok/user/profile', headers=headers, params=params)
+
+    print(response.text)
+
+# 第二页请求
+def douchachaListNextPage():
+    import requests
+
+    headers = {
+        'Host': 'api.douchacha.com',
+        'Origin': 'https://www.douchacha.com',
+        'Content-Type': 'application/json;charset=utf-8',
+        'Accept-Language': 'zh-cn',
+        'Accept': 'application/json, text/plain, */*',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.2 Safari/605.1.15',
+        'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODIxNjY3NDEsInVzZXJJZCI6MTIyNzc4NTg4ODkwMTA0MjE3OCwiY3JlYXRlRGF0ZSI6IjIwMjAtMDItMTMgMTA6NDU6NDEifQ.vdzCC0TCYlppNE9_4JIQli1jxBa_85m3CbnQNuvNJsM',
+        'Referer': 'https://www.douchacha.com/',
+    }
+
+    params = (
+        ('ts', '1581570838996'),
+        ('he', 'n05sBBAunroFneNXJ3WEEDDdmFA5Dc4dxjb03LNQLss='),
+        ('sign', 'b4c91df9621bb001'),
+    )
+
+    data = '{"page_no":1,"page_size":10,"params_data":{"label_name":"","period":"WEEK","period_value":"20200209"}}'
+
+    response = requests.post('https://api.douchacha.com/api/tiktok/ranking/user_list_gain', headers=headers,
+                             params=params, data=data)
+
+    print(response.text)
+
 if __name__ == '__main__':
-    qqkandian()
-    '''
-    MTAwMTAwMDExNDQ0Nw%3d%3d
-    MzA2MTM4MjI2MA==
-    
-    '''
+    # douchachalist()
+    # douchachauser()
+    douchachaListNextPage()
