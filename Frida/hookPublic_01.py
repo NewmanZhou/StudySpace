@@ -14,6 +14,7 @@ import codecs
 
 import frida, sys
 
+
 def message(message, data):
     if message["type"] == 'send':
         print("[on_message] message:", message['payload'], "data:", data)
@@ -22,10 +23,16 @@ def message(message, data):
     else:
         print(message)
 
-with codecs.open('fridahook.js','r', 'utf-8') as f:
+
+with codecs.open('fridahook.js', 'r', 'utf-8') as f:
     jscode = f.read()
 
+# 默认端口注入
 process = frida.get_remote_device().attach('com.example.newmanzhou.newman')
+# 自行指定端口注入
+# process = frida.get_device_manager().add_remote_device("127.0.0.1:9999") \
+#     .attach('com.example.newmanzhou.newman')
+
 script = process.create_script(jscode)
 script.on("message", message)
 script.load()

@@ -817,7 +817,76 @@ def douchachaListNextPage():
 
     print(response.text)
 
+def sohuUser():
+    import requests
+
+    headers = {
+        'Host': 'api.k.sohu.com',
+        # 'x-tingyun-id': '9lCBGZzA0AQ;c=2;r=1402102220;',
+        'user-agent': 'okhttp/3.9.1',
+    }
+
+    params = (
+        ('p1', 'NjY1MTc2MDA4NjE2MTQ2OTUzMQ%3D%3D'),
+        # ('u', '1'),
+        # ('pid', '6651760620662599724'),
+        # ('token',
+        #  'SN_GbM4E/Eaxexa0kDUuoyN39aOkX8BH1w0lVV1.7TWnk1ulieW2AHnpfHU4mKsF856AXRsqSC5xfdQH/4Bg6GBGuhNn51MRuW6IjGI6J6TMvXbLJcRT1Ork3biVSk9I4Nn0nkBmVa69WV5.SJQVhqlVTt0KoZiAZiydNm4LuPdugA='),
+        # ('gid', '02ffff11061101fe371ecc6cdf2d19603fbcdde24899b6'),
+        # ('ppAppId', '110608'),
+        # ('ppAppVs', '6.3.8'),
+        ('queryPid', '5992226693438681195'),
+    )
+
+    response = requests.get('https://api.k.sohu.com/api/v2/usercenter/query.go',  params=params)
+
+    print(response.text)
+
+def sohuUserNum():
+    import requests
+
+    headers = {
+        'Host': 'api.k.sohu.com',
+        # 'SCOOKIE': '256f1ed86c0ee9ff332d2bf8a7bf721c7379dac52353dc2b3759ee0785e3fb3264e8e44fae390b12674e50891c12f8917898bf63dd27f95bc45f1d427e3ecef844f776997f0b05999a6ba1672ed0c2baa0facc11eedde4273683bdcb9cbe2eada24e8d2d49fdb72fdfce506d0f51c0ec420e85db253981db3c274d6ea73b9d61d37299cdd1f51e408597add8d8a668f634fade8588658c997e368022bc997837c8c8c243652021a06bf194d8474d2b781618b11140a01609968f505f7b7e295f992aa17c641d848c7102c1047f0b089f0b85ad741e31aedbad2d092fe7ce2e2bb41266f438c52bf55d072015f4d46aac9af815adf40a1d780cf6f79b0ff78179384c36528554ecf7a8d551307465ba239484f804563c0b848502458e4efef5fc0864d549556db3e91f60e962cdf04e7c04b023a9af5b648fc341227ca079a2929f906e21c98a78c5187a2c05c8fc96d366f74fce56dd4c05e9d0a53ee4f02610342186971897b1532b64cc13727f63d51b6be98a7f80db1100bf0c69c6865007bd2df2fe7f95709d439f8256cabbfe0d7cf89f269d9a3717cd6d0bc15d1fce4a5cccc6f2fb35a170aebc0863a0e68eac9dde831eb1c157dffc501057c980cb5c9b9d63fc7aa828cbb5d6586b65c9aa908370f352bd63fd7ccc668aa6abe5d1b5f8f32000611682ea0e4f70c9a35dce6dbd3ffa3389deaf054453027962c419e0be36e33a0c3ebe5efcd96c2e42ac7ca205c64a915a955b993469ef57cb9612a26e1b5a4243ba80f555527d6a4e8123ea',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1; PRO 5 Build/LMY47D) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/40.0.2214.116 Mobile Safari/537.36 JsKit/1.0 (Android);',
+        'Referer': 'https://api.k.sohu.com/h5apps/newssdk.sohu.com/modules/newSearch/newSearch.html?type=morepop&keyfrom=input&refertype=1&keyword=7500km',
+        'Accept-Language': 'zh-CN,en-US;q=0.8',
+    }
+
+    params = (
+        # ('rt', 'json'),
+        # ('pageNo', '1'),
+        ('words', '每日经济新闻'),
+        # ('keyword', '7500km'),
+        ('p1', 'NjY1MTc2MDA4NjE2MTQ2OTUzMQ=='),
+        # ('pageSize', '10'),
+        # ('type', '0'),
+        # ('pid', '6651760620662599724'),
+        # ('token',
+        #  'SN_GbM4E/Eaxexa0kDUuoyN39aOkX8BH1w0lVV1.7TWnk1ulieW2AHnpfHU4mKsF856AXRsqSC5xfdQH/4Bg6GBGuhNn51MRuW6IjGI6J6TMvXbLJcRT1Ork3biVSk9I4Nn0nkBmVa69WV5.SJQVhqlVTt0KoZiAZiydNm4LuPdugA='),
+        # ('gid', '02ffff11061101fe371ecc6cdf2d19603fbcdde24899b6'),
+        # ('apiVersion', '42'),
+        # ('sid', '10'),
+        # ('u', '1'),
+        # ('bid', ''),
+        # ('keyfrom', 'input'),
+        # ('autoCorrection', ''),
+        # ('refertype', '1'),
+        # ('versionName', '6.3.8'),
+        # ('os', 'android'),
+        # ('picScale', '16'),
+        # ('h', '1812'),
+        # ('_', '1587544433763'),
+    )
+
+    response = requests.get('https://api.k.sohu.com/api/search/v6/search.go', headers=headers, params=params)
+
+
+    print(response.text)
+
 if __name__ == '__main__':
     # douchachalist()
     # douchachauser()
-    douchachaListNextPage()
+    sohuUserNum()
