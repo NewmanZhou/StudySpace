@@ -1,71 +1,49 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri May 15 13:17:21 2020
-@author: 李运辰
-"""
+# -*- coding=utf-8-*-
+import base64 ,time ,hashlib , requests
+from pyDes import des, PAD_PKCS5, CBC
 
-import requests
+def getMD5():
+    s = 'equtype=ANDROID&loginImei=Android358240051111110&timeStamp=1597829003892&userPwd=qwerty&username=16688889999&key=sdlkjsdljf0j2fsjk'
+    # s.encode()#变成bytes类型才能加密
+    m = hashlib.md5(s.encode())
+    print(m.hexdigest().upper())
 
-requests.packages.urllib3.disable_warnings()
-headers = {
+def getReqBody():
+    KEY = base64.urlsafe_b64decode("w9JtyoYll4I=")
+    IV = base64.urlsafe_b64decode("MzIwMjgwOTI=")
+    data = '{"equtype":"ANDROID","loginImei":"Android358240051111110","sign":"AA6D08F069DB7C8BD04779FCCF3B8CDD","timeStamp":"1597829699467","userPwd":"qwerty","username":"18519728110"}'.encode("utf-8")
+    des_obj = des(KEY, CBC, IV, padmode=PAD_PKCS5)  # 初始化一个des对象，参数是秘钥，加密方式，偏移， 填充方式
 
-    #
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.3",
-}
-headers2 = {
-    # "Host":"music.liuzhijin.cn",
-    "Host": "live.kuaishou.com",
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.3",
-    "Cookie": "did=web_c0f3196ec94d4837b5f7850e3ebac3b9; didv=1589520098000; clientid=3; client_key=65890b29",
-}
+    secret_bytes = des_obj.encrypt(data)
+    return (base64.standard_b64encode(secret_bytes))
 
 
-def geturl(url0):
-    # url0="https://v.kuaishou.com/5loz4u"
-    res0 = requests.get(url0, headers=headers, verify=False)
-    """转接第二段"""
-
-    cookie = res0.cookies.get_dict()
-    cookie = str(cookie).replace("{", "").replace("}", "").replace(" ", "").replace("'", "").replace(",", ";")
-
-    headers3 = {
-        "Host": "v.kuaishou.com",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.3",
-        "Cookie": cookie.replace(":", "=")
+def login():
+    headers = {
+        'If-Modified-Since': 'Tue, 18 Aug 2020 09:18:09 GMT+00:00',
+        'Content-Type': 'application/json; charset=utf-8',
+        'User-Agent': 'Dalvik/1.6.0 (Linux; U; Android 4.4.2; Android SDK built for x86 Build/KK)',
+        'Host': 'api.dodovip.com',
     }
 
-    headers4 = {
-        "Host": "live.kuaishou.com",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.3",
-        "Cookie": cookie.replace(":", "=")
-    }
-    res1 = requests.get(url0, headers=headers3, allow_redirects=False)
-    url2 = res1.headers['Location']
+    data = '{"Encrypt":"NIszaqFPos1vd0pFqKlB42Np5itPxaNH//FDsRnlBfgL4lcVxjXii4oHXYj/wLHH40VHAnW5AWkUjKsU3M6MCVuWQa5JsW3nhEAzXnjVBtTRWQm9BELZ+ESZw5LYufDrxVBW4u5Jx3W2tdA57m90Qx8ZvIoyhAn2F1Pr9TwA7jta8aR56s/X4Ej7ab6OknCeRTD59OPSGSzBT1pDGSHdPgVFo8OZxpZxGZ+7vfklJc="}'
 
-    url_00 = url2.split("userId=")[1].split("&")[0]
+    response = requests.post('http://api.dodovip.com/api/user/login', headers=headers, data=data)
+    print(response.status_code)
+    print(response.text)
 
-    """第一部分url"""
-    url_0 = url2.split("?")[0].split("/")[-1]
-    res2 = requests.get(url2, headers=headers3, allow_redirects=False).request.headers
+if __name__ == '__main__':
+    print(getReqBody())
+    # getReqBody()
 
-    """第二部分url"""
-    url_1 = res2['Cookie'].split(";")[-1].replace(":", "=")
+'''
+https://c-ssl.duitang.com/uploads/item/201912/09/20191209190342_lkojb.thumb.700_0.jpg
+https://c-ssl.duitang.com/uploads/item/201912/09/20191209190342_lkojb.jpg"
 
-    """完整url"""
-    url = "https://live.kuaishou.com/u/" + url_00 + "/" + url_0 + "?" + url_1
-    # print(url)
+https://c-ssl.duitang.com/uploads/item/201912/09/20191209191321_olbex.thumb.700_0.jpg
+https://c-ssl.duitang.com/uploads/people/202008/22/20200822203333_MkzWi.thumb.700_0.jpg
 
-    response = requests.get(url, headers=headers4)
-    text = response.text
-    print(text)
-    """视频链接"""
-    v_url = text.split('"playUrl":"')[1].split(".mp4")[0] + ".mp4"
-    v_url = v_url.replace("u002F", "")
-    # print(v_url)
-    return v_url
+https://221.228.82.177/napi/blog/list/by_filter_id/?filter_id=%E7%88%B1%E8%B1%86-%E6%9E%97%E5%BD%A6%E4%BF%8A-%E5%A3%81%E7%BA%B8heap&include_fields=sender%2Calbum%2Cicon_url%2Clike_count%2Creply_count&start=0&screen_width=1080&locale=zh&app_version=7.9.7.2&platform_name=Android&app_code=nayutas&screen_height=1920&platform_version=5.1&__domain=www.duitang.com
+https://221.228.82.177/napi/blog/detail/?include_fields=share_links_3,tags,related_albums,related_albums.covers,top_like_users,extra_html&blog_id=1162680424&__domain=www.duitang.com
 
-
-st = "陪伴是最常情的告白，守护是最沉默的陪伴…… #汪星人 #宠物避障挑战 https://v.kuaishou.com/5xXNiL 复制此链接，打开【快手App】直接观看！"
-st = "http" + (st.split("复制")[0].split("http")[1].replace(" ", ""))
-u = geturl(st)
-print(u)
+'''

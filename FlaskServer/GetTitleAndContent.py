@@ -12,7 +12,7 @@
 # @Software: PyCharm
 from readability.readability import Document
 import urllib3, re, html2text, json
-
+urllib3.disable_warnings()
 from lxml import etree
 
 
@@ -70,6 +70,6 @@ class GetTitleAndContent(object):
         }
         return json.dumps(return_dict)
 
-# myClass = GetTitleAndContent()
-# data = myClass.getTitleAndContent('https://news.e23.cn/wanxiang/2020-08-06/2020080600616.html')
-# print(data)
+myClass = GetTitleAndContent()
+data = myClass.getTitleAndContent('https://new.qq.com/omn/20200803/20200803A08HVI00.html')
+print(json.loads(data))
