@@ -62,6 +62,59 @@ def baiduquery(query):
     dict_data = json.loads(response.text)
     print(dict_data["dict_result"]["simple_means"]["word_means"][0])
 
+
+def fanyi():
+    import requests
+
+    cookies = {
+        'BIDUPSID': '61A2A56C52A95A7451B7E6A12A8C909A',
+        'PSTM': '1617674951',
+        'BAIDUID': '61A2A56C52A95A742C3A8CD677226B8F:FG=1',
+        'BDORZ': 'B490B5EBF6F3CD402E515D22BCDA1598',
+        '__yjs_duid': '1_3798492cd3b560f425279a6d733790bf1618294720777',
+        'REALTIME_TRANS_SWITCH': '1',
+        'FANYI_WORD_SWITCH': '1',
+        'HISTORY_SWITCH': '1',
+        'SOUND_SPD_SWITCH': '1',
+        'SOUND_PREFER_SWITCH': '1',
+        'H_PS_PSSID': '33801_33816_33746_33344_31254_33756_33675_33713_26350_22160',
+        'delPer': '0',
+        'PSINO': '2',
+        'BA_HECTOR': '8g05ah250h2h24a0jo1g7cmon0q',
+        'BAIDUID_BFESS': '61A2A56C52A95A742C3A8CD677226B8F:FG=1',
+        'Hm_lvt_64ecd82404c51e03dc91cb9e8c025574': '1618313918,1618369381',
+        'Hm_lpvt_64ecd82404c51e03dc91cb9e8c025574': '1618369381',
+        '__yjs_st': '2_YjEzNmNjODgzNjE5N2VkNzFkMzAxMGY0ODcyZjdmMDI0ZWFhYjBhZTNhNzYyZWJmZjg1NjEzMGRmNWNhOTc0ZTM1NzRmMDYwMTZiM2M3OGVhZTYwZDFkYzViYzYyMjkxM2VkYTc0NTRiMGZjYmY1ZDdlYTU1NzQ2ZDBmOGI4NDcyNTQyZWNiNzc4Mjg2M2UzM2QzYmY1MTkwY2M4ZTQ4OGQzM2ZjYzViMTY4OWY1YjM3ZjVkZjRiNGJiMTI5MDllNDZmYjkyYzUxNmYzODhhMDJiYTk2MTA5YzRiODU4MTUyNzAzYzY5ZjI5NThkNTA5OWUxMGM5MWZjODYzN2NkZl83XzYxMzYzNjg1',
+        'ab_sr': '1.0.0_NmJhOTlkZmI3MDg0NDI3YWVjOGU3Zjc5ODIwMzQ0MjJkM2I1YjFhZDc4YjcyZjRjMjIyYWJmNmU2YzlkYmQyMzgwYzkzZDhmMjFkODYwMjViOGI1ZTUzOGMyN2U5MmVl',
+    }
+
+    headers = {
+        'Connection': 'keep-alive',
+        'Pragma': 'no-cache',
+        'Cache-Control': 'no-cache',
+        'sec-ch-ua': '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'X-Requested-With': 'XMLHttpRequest',
+        'sec-ch-ua-mobile': '?0',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Origin': 'https://fanyi.baidu.com',
+        'Sec-Fetch-Site': 'same-origin',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Dest': 'empty',
+        'Referer': 'https://fanyi.baidu.com/',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+    }
+
+    data = {
+        'kw': 'cat'
+    }
+
+    response = requests.post('https://fanyi.baidu.com/sug', headers=headers,data=data)
+    dict_data = json.loads(response.text)
+    print(dict_data)
+
 if __name__ == '__main__':
     # print(encodejs("测试数据"))
-    baiduquery("你好")
+    # baiduquery("测试")
+    fanyi()

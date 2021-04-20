@@ -10,6 +10,7 @@
 # @Project : StudySpace
 # @FileName: Pyppeteer.py
 # @Software: PyCharm
+import re
 import asyncio
 import json
 from pyppeteer import launch
@@ -30,28 +31,61 @@ async def main():
     # browser = await launch(
     #     {'headless': False, 'dumpio': True, 'autoClose': False, 'args': ['--no-sandbox', '--window-size=1366,850']})
     # await page.setViewport({'width': 1366, 'height': 768})
+    try:
+        browser = await launch(headless=False, dumpio=True,
+                               args=['--disable-infobars', '--proxy-server=socks5://127.0.0.1:9050'])
+        page = await browser.newPage()
 
-    browser = launch(headless=False, args=['--disable-infobars', '--proxy-server=socks5://127.0.0.1:9050'])
-    page = await browser.newPage()
-    await page.evaluate(
-        '''() =>{ Object.defineProperties(navigator,{ webdriver:{ get: () => false } }) }''')
-    await page.goto('http://xxxxxxxx3a3kuuhhw5w7stk25fzhttrlpiomij5bogkg7yyqsng5tqyd.onion', {'timeout': 100 * 1000})
-    page.waitForNavigation(),
-    await page.screenshot(path="test_screenshot.png")
+        await page.goto('http://xxxxxxxx3a3kuuhhw5w7stk25fzhttrlpiomij5bogkg7yyqsng5tqyd.onion', {'timeout': 50 * 1000})
+        await page.evaluate(
+            '''() =>{ Object.defineProperties(navigator,{ webdriver:{ get: () => false } }) }''')
+        page.waitForNavigation(),
+        # await page.screenshot(path="test_screenshot.png")
+        cookie = await login(page)
+        print("登录成功：")
+        str_response = str(cookie)
+        # 加异常判断 res = [] 时需要处理下
+        res = re.findall("'PHPSESSID',\s+'value':\s+'(.*?)'", str_response)[0]
+        print(res)
+    except Exception as e:
+        print("ERROR: %s" % e)
+        page.close()
+        try:
+            asyncio.get_event_loop().run_until_complete(await main())
+        except Exception as e:
+            print("ERROR_CHILD: %s" % e)
+
+
+async def login(page):
     yazhengma = await page.waitFor('//fieldset[@class="fieldset_login"]//img')  # 通过css selector定位验证码元素
     await yazhengma.screenshot({'path': 'yazhengma.png'})  #
     res = TestFunc()
-    print(res)
+    print("验证码：%s" % res)
     await page.type('input[name=lgid]', userName, {'delay': 100})
     await page.type('input[name=lgpass]', passWord, {'delay': 100})
-    # await page.type('input[name=sub_code]', res, {'delay': 100})
+    await page.type('input[name=sub_code]', res, {'delay': 100})
     ele = await page.waitForXPath('//input[@class="login_botton"]')
-    print(ele)
     await ele.click()  # 点击页面元素
-    cookie = await page.cookies()
-    print(cookie)
+    print("登录点击")
+    await page.waitFor(1000 * 10)
+    print("等待结束")
+    '''
+    登录成功的Url
+    'http://xxxxxxxx3a3kuuhhw5w7stk25fzhttrlpiomij5bogkg7yyqsng5tqyd.onion/index.php'
+    '''
+    # 获取登录成功的页面属性 进行判断是否成功登录。
 
-    await asyncio.sleep(100)
+    # divuserbar = await page.waitFor('//div[@class="div04"]')
+    # print(divuserbar)
+    if "/login.php" not in page.url:
+        cookie = await page.cookies()
+        return cookie
+    else:
+        login(page)
+
+    # 登录后的校验
+
+    page.close()
 
 
 def TestFunc():
@@ -81,3 +115,24 @@ def TestFunc():
 
 if __name__ == '__main__':
     asyncio.get_event_loop().run_until_complete(main())
+    '''
+    options.add_argument('--disable-infobars')  # 禁止策略化
+    options.add_argument('--no-sandbox')  # 解决DevToolsActivePort文件不存在的报错
+    options.add_argument('window-size=1920x3000')  # 指定浏览器分辨率
+    options.add_argument('--disable-gpu')  # 谷歌文档提到需要加上这个属性来规避bug
+    options.add_argument('--incognito')  # 隐身模式（无痕模式）
+    options.add_argument('--disable-javascript')  # 禁用javascript
+    options.add_argument('--start-maximized')  # 最大化运行（全屏窗口）,不设置，取元素会报错
+    options.add_argument('--hide-scrollbars')  # 隐藏滚动条, 应对一些特殊页面
+    options.add_argument('blink-settings=imagesEnabled=false')  # 不加载图片, 提升速度
+    options.add_argument('--headless')  # 浏览器不提供可视化页面. linux下如果系统不支持可视化不加这条会启动失败
+    options.binary_location = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"  # 手动指定使用的浏览器位置
+    options.add_argument('lang=en_US') # 设置语言
+    options.add_argument('User-Agent=Mozilla/5.0 (Linux; U; Android 8.1.0; zh-cn; BLA-AL00 Build/HUAWEIBLA-AL00) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/57.0.2987.132 MQQBrowser/8.9 Mobile Safari/537.36')
+    options.add_argument('--headless')  # 浏览器不提供可视化页面
+    prefs = {"":""}
+    prefs["credentials_enable_service"] = False
+    prefs["profile.password_manager_enabled"] = False
+    chrome_option_set.add_experimental_option("prefs", prefs) # 屏蔽'保存密码'提示框
+    
+    '''

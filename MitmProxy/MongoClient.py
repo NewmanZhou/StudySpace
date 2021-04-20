@@ -45,9 +45,12 @@ class MongodbClient():
         download_dir = "/Users/newmanzhou/Downloads/douyin/%s/" % video_obj['author']
         download_url = "https://aweme.snssdk.com/aweme/v1/play/?video_id=%s&line=0" % video_obj['uri']
         self.mkdir(download_dir)
-        file_name = '%s%s.mp4' % (download_dir, video_obj['uri'])
+        file_name = '%s%s.mp4' % (download_dir, video_obj['title'])
         # r = requests.get(video_obj["sourceUrl"], headers=headers, stream=True)
-        r = requests.get(download_url, headers=headers, allow_redirects=True)
+        try:
+            r = requests.get(download_url, headers=headers, allow_redirects=True, timeout=15)
+        except Exception as e:
+            print(e)
         with open(file_name, 'wb') as f:
             for chunk in r.iter_content(chunk_size=1024 * 1024):
                 if chunk:
@@ -60,7 +63,7 @@ class MongodbClient():
             for data in datas:
                 self.download(data)
                 self.mgdb['douyin'].update({'_id': ObjectId(data['_id'])}, {'$set': {'type': 1}})
-            time.sleep(10)
+            time.sleep(2)
 
     def mkdir(self, path):
         # 去除首位空格
