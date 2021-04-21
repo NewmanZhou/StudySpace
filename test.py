@@ -783,28 +783,78 @@ def scrapysplash():
     print(data)
 
 
-if __name__ == '__main__':
-    proxies = {
-        'http': 'socks5h://localhost:9050',
-        'https': 'socks5h://localhost:9050'
+def weixin():
+    headers = {
+        'authority': 'mp.weixin.qq.com',
+        'pragma': 'no-cache',
+        'cache-control': 'no-cache',
+        'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
+        'x-requested-with': 'XMLHttpRequest',
+        'sec-ch-ua-mobile': '?0',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36',
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'accept': '*/*',
+        'origin': 'https://mp.weixin.qq.com',
+        'sec-fetch-site': 'same-origin',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+        'referer': 'https://mp.weixin.qq.com/',
+        'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8',
     }
 
-    # PHPSESSID = china_blog(
-    # china_blog_stylecss(PHPSESSID)
-    # china_blog_dcss(PHPSESSID)
-    # china_blog_pic(PHPSESSID)
-    #
-    # china_blog_favicon(PHPSESSID)
-    # print('==' * 15)
-    # print(PHPSESSID)
-    # china_blog_post_login("373odvgbvat9djma61ja8ms8gm", "733a")
-    # china_blog_get_logined("rdfkjlgb3oj5cmcepo79l51lcg", "607271")
-    # testSeleniumTor()
-    # china_blog_list_pager()
+    params = (
+        ('action', 'startlogin'),
+    )
 
-    # re_cookie()
-    # dark_trading_login()
-    # dark_trading_getList()
-    # dark_during_content()
-    # scrapysplash()
+    data = {
+        'username': 'newmanzhou@163.com',
+        'pwd': '119011414d579f5d126dbb211ad3ce9b',
+        'imgcode': '',
+        'f': 'json',
+        'userlang': 'zh_CN',
+        'redirect_url': '',
+        'token': '',
+        'lang': 'zh_CN',
+        'ajax': '1'
+    }
 
+    response = requests.post('https://mp.weixin.qq.com/cgi-bin/bizlogin', headers=headers, params=params, data=data)
+
+    print(response.text)
+    print(requests.utils.dict_from_cookiejar(response.cookies))
+    '''
+    {'bizuin': '3924221110', 
+    'cert': 'FOyrRO_btEdlXXzbBrUesQ2VJ9FUK9UY',
+     'fake_id': '3924221110', 
+     'login_certificate': '9aXmYfo6Qsp4hAuGKiavK7M+ybwUJIoQApzNzTICqI0=',
+      'login_sid_ticket': '95385ffa9af6646ffd1cf5064fc0fe794132946e', 
+      'ticket': '81d13e8c1dfe523d71b34a6fe23fa49918d92e99',
+       'ticket_certificate': 'kpCvSjXFU29xg+CHPHdZ/zmkMAM9ByJYzf/DFrF3lwI=',
+        'ticket_id': 'gh_179d2ed1dd07', 
+        'ticket_uin': '3924221110', 'uuid': 'a53563b79b3eb516e0f44dab4614e07b'}
+        
+        
+  cert=8br4w2B9svguEP58kHJo58d1j3aKs5_9; 
+  ua_id=dKzCqfugKx8DVYwgAAAAAP5bn2plkO-SDLTwC6rFVRY=; 
+  wxuin=18988509968779; 
+  sig=h013c0205a2c003c6766103700e3a3f0b3be6a20bb19266ae6f43d291e5443b7c2d65528bad7b8e9127; 
+  uuid=8c5f21316fb6d25eca97bff93905a981; 
+  bizuin=3924221110; 
+  ticket=81d13e8c1dfe523d71b34a6fe23fa49918d92e99; 
+  ticket_id=gh_179d2ed1dd07; 
+  noticeLoginFlag=1; 
+  rand_info=CAESIC6CcJ7NBl6bJGprvvL3eDCVQa/u3Va+ZCQ/g/2NykEE; 
+  slave_bizuin=3924221110; 
+  data_bizuin=3924221110; 
+  data_ticket=CuZwU16YlINn7Y82wCeuty22uGgzpGm8MxKIzI4qFO1afaAB4fYtqKiclr/3fB8D; 
+  slave_sid=WXpWbFRETUZqODFkbXhXTV9MQ2xnR2ROaG5zdFFkYWlQZnJkcVRldXNVZFdLaFlLbGtTX1MxY1l6TWkzcktZQV9abnNCdmhmb2xYUzRsbDFlV0RaalQ2Y3RKM2o3UVFRU0NnMzVJZ19IZTk3VEd5SkV5RWhpYlZDSFVzYTJ3eWRYY1l5bjdHMkc0cW9ZZzRl; 
+  slave_user=gh_179d2ed1dd07; 
+  xid=0682b65704ac367f152bc52ab3653548;
+openid2ticket_ottzm6YLqMN1gln4WfJX2bxtBkYc=RkwqfyX+8zck2HBvYDm1EdKPbKTKWVDiWNuI70LCvqE=; 
+mm_lang=zh_CN
+        
+    '''
+
+
+if __name__ == '__main__':
+    weixin()
